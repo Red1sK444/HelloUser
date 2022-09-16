@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -135,4 +136,17 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_end="16dp" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/registerTextInputLayoutGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="registerConfirmPasswordTextInputLayout,registerPasswordTextInputLayout,registerBirthDateTextInputLayout,registerSurnameTextInputLayout,registerNameTextInputLayout" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/registerTextInputEditTextGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="registerPasswordTextInputEditText,registerNameTextInputEditText,registerSurnameTextInputEditText,registerBirthDateTextInputEditText,registerConfirmPasswordTextInputEditText"
+        tools:ignore="NotSibling" />
 </androidx.constraintlayout.widget.ConstraintLayout>

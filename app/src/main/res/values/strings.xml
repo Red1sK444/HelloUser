@@ -7,4 +7,5 @@
     <string name="confirm_password">Подтверждение пароля</string>
     <string name="shift_lab">ШИФТ ЛАБ</string>
     <string name="registration">Регистрация</string>
+    <string name="empty" />
 </resources>
