@@ -1,8 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".presentation.register.RegisterActivity">
 
+    <TextView
+        android:id="@+id/registerTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/shift_lab"
+        android:textColor="@color/red"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toTopOf="@+id/registerNameTextInputLayout"
+        app:layout_constraintEnd_toStartOf="@id/registerUpRightGuideline"
+        app:layout_constraintStart_toStartOf="@id/registerLeftGuideline"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/registerNameTextInputLayout"
+        style="@style/Widget.Design.TextInputEditText.MyTextInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/registerSurnameTextInputLayout"
+        app:layout_constraintEnd_toStartOf="@id/registerUpRightGuideline"
+        app:layout_constraintStart_toStartOf="@id/registerLeftGuideline">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/registerNameTextInputEditText"
+            style="@style/Base.Widget.MaterialComponents.TextView.ParagraphMediumText.MyTextInputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/name" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/registerSurnameTextInputLayout"
+        style="@style/Widget.Design.TextInputEditText.MyTextInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/registerBirthDateTextInputLayout"
+        app:layout_constraintEnd_toStartOf="@id/registerUpRightGuideline"
+        app:layout_constraintStart_toStartOf="@id/registerLeftGuideline">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/registerSurnameTextInputEditText"
+            style="@style/Base.Widget.MaterialComponents.TextView.ParagraphMediumText.MyTextInputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/surname" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/registerBirthDateTextInputLayout"
+        style="@style/Widget.Design.TextInputEditText.MyTextInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/registerPasswordTextInputLayout"
+        app:layout_constraintEnd_toStartOf="@id/registerUpRightGuideline"
+        app:layout_constraintStart_toStartOf="@id/registerLeftGuideline">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/registerBirthDateTextInputEditText"
+            style="@style/Base.Widget.MaterialComponents.TextView.ParagraphMediumText.MyTextInputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/date_of_birth" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/registerPasswordTextInputLayout"
+        style="@style/Widget.Design.TextInputEditText.MyTextInput.Password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/registerConfirmPasswordTextInputLayout"
+        app:layout_constraintEnd_toStartOf="@id/registerUpRightGuideline"
+        app:layout_constraintStart_toStartOf="@id/registerLeftGuideline">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/registerPasswordTextInputEditText"
+            style="@style/Base.Widget.MaterialComponents.TextView.ParagraphMediumText.MyTextInputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/registerConfirmPasswordTextInputLayout"
+        style="@style/Widget.Design.TextInputEditText.MyTextInput.Password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/registerRegisterButton"
+        app:layout_constraintEnd_toStartOf="@id/registerUpRightGuideline"
+        app:layout_constraintStart_toStartOf="@id/registerLeftGuideline">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/registerConfirmPasswordTextInputEditText"
+            style="@style/Base.Widget.MaterialComponents.TextView.ParagraphMediumText.MyTextInputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/confirm_password"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/registerRegisterButton"
+        style="@style/Widget.MaterialComponents.Button.ButtonMediumText.MediumButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="@string/registration"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/registerUpRightGuideline"
+        app:layout_constraintStart_toStartOf="@id/registerLeftGuideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/registerLeftGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/registerUpRightGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
