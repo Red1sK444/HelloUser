@@ -8,4 +8,7 @@
     <string name="shift_lab">ШИФТ ЛАБ</string>
     <string name="registration">Регистрация</string>
     <string name="empty" />
+
+    <!-- Failures -->
+    <string name="empty_field">Empty field</string>
 </resources>

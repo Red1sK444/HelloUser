@@ -10,7 +10,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.r3d1r4ph.hellouser.R
 import com.r3d1r4ph.hellouser.databinding.ActivityRegisterBinding
-import com.r3d1r4ph.hellouser.presentation.common.extensions.setError
+import com.r3d1r4ph.hellouser.presentation.common.extensions.setErrorIfNotEmpty
 import com.r3d1r4ph.hellouser.presentation.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,7 +28,8 @@ class RegisterActivity : AppCompatActivity(R.layout.activity_register) {
 
     private fun setObservers() = with(viewModel) {
         uiState.observe(this@RegisterActivity) { uiState ->
-            setErrors(uiState.inputFieldErrors)
+            viewBinding.registerRegisterButton.isEnabled = uiState.isRegisterAvailable
+            setInputFieldsErrors(uiState.inputFieldErrors)
         }
         uiAction.observe(this@RegisterActivity) { event ->
             event.getContentIfNotHandled()?.let { action ->
@@ -39,13 +40,28 @@ class RegisterActivity : AppCompatActivity(R.layout.activity_register) {
         }
     }
 
+    private fun setInputFieldsErrors(
+        inputFieldErrors: Map<RegisterInputFieldEnum, Int?>
+    ) = with(viewBinding) {
+        registerTextInputLayoutGroup.referencedIds
+            .map { id -> findViewById(id) as? TextInputLayout }
+            .filterNotNull()
+            .forEach { view ->
+                view.setErrorIfNotEmpty(
+                    inputFieldErrors[RegisterInputFieldEnum.fromTextInputLayoutId(
+                        view.id
+                    )]
+                )
+            }
+    }
+
     private fun openMainScreen() {
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
 
     private fun initView() {
-        setErrorDismisses()
+        initInputFieldsErrorDismisses()
 
         viewBinding.registerRegisterButton.setOnClickListener {
             with(viewBinding) {
@@ -54,25 +70,17 @@ class RegisterActivity : AppCompatActivity(R.layout.activity_register) {
         }
     }
 
-    private fun setErrorDismisses() = with(viewBinding) {
+    private fun initInputFieldsErrorDismisses() = with(viewBinding) {
         registerTextInputEditTextGroup.referencedIds
             .map { id -> findViewById(id) as? TextInputEditText }
             .filterNotNull()
             .forEach { view ->
-                view.addTextChangedListener {
-                    viewModel.dismissError(RegisterInputFieldEnum.fromTextInputEditTextId(view.id))
+                view.addTextChangedListener { editable ->
+                    viewModel.dismissIfNotBlankOrSetEmptyError(
+                        editable,
+                        RegisterInputFieldEnum.fromTextInputEditTextId(view.id)
+                    )
                 }
-            }
-    }
-
-    private fun setErrors(
-        inputFieldErrors: Map<RegisterInputFieldEnum, Int?>
-    ) = with(viewBinding) {
-        registerTextInputLayoutGroup.referencedIds
-            .map { id -> findViewById(id) as? TextInputLayout }
-            .filterNotNull()
-            .forEach { view ->
-                view.setError(inputFieldErrors[RegisterInputFieldEnum.fromTextInputLayoutId(view.id)])
             }
     }
 }

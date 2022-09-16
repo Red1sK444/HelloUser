@@ -1,9 +1,7 @@
 package com.r3d1r4ph.hellouser.presentation.register
 
 import androidx.annotation.IdRes
-import androidx.annotation.StringRes
 import com.r3d1r4ph.hellouser.R
-import com.r3d1r4ph.hellouser.presentation.register.RegisterInputFieldEnum.*
 
 enum class RegisterInputFieldEnum {
     NAME,
@@ -33,22 +31,4 @@ enum class RegisterInputFieldEnum {
                 else -> throw Exception("Invalid text input edit text Id - $textInputEditTextId")
             }
     }
-}
-
-@StringRes
-fun RegisterInputFieldEnum.getTextInputLayoutId(): Int = when (this) {
-    NAME -> R.id.registerNameTextInputLayout
-    SURNAME -> R.id.registerSurnameTextInputLayout
-    BIRTH_DATE -> R.id.registerBirthDateTextInputLayout
-    PASSWORD -> R.id.registerPasswordTextInputLayout
-    CONFIRM_PASSWORD -> R.id.registerConfirmPasswordTextInputLayout
-}
-
-@StringRes
-fun RegisterInputFieldEnum.getTextInputEditTextId(): Int = when (this) {
-    NAME -> R.id.registerNameTextInputEditText
-    SURNAME -> R.id.registerSurnameTextInputEditText
-    BIRTH_DATE -> R.id.registerBirthDateTextInputEditText
-    PASSWORD -> R.id.registerPasswordTextInputEditText
-    CONFIRM_PASSWORD -> R.id.registerConfirmPasswordTextInputEditText
 }
