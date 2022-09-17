@@ -17,6 +17,11 @@
         <item name="android:autofilledHighlight">@android:color/transparent</item>
     </style>
 
+    <!-- Dialog -->
+    <style name="AppMaterialDialog" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="android:windowBackground">@drawable/bg_greeting_dialog</item>
+    </style>
+
     <!-- Text Views -->
     <style name="Base.Widget.MaterialComponents.TextView.ParagraphMediumText">
         <item name="android:textSize">14sp</item>
