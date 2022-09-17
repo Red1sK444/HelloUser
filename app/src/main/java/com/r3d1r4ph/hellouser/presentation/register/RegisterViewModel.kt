@@ -19,13 +19,26 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
     val uiAction: LiveData<Event<RegisterAction>>
         get() = _uiAction.map { it }
 
+    fun tryToRegister(
+        name: String,
+        surname: String,
+        dateOfBirth: String,
+        password: String,
+        confirmPassword: String
+    ) {
+        viewModelScope.launch {
+            // TODO Field Validation
+            _uiAction.value = Event(RegisterAction.OpenMainScreen)
+        }
+    }
+
     fun dismissIfNotBlankOrSetEmptyError(
         inputFieldText: Editable?,
         registerInputFieldEnum: RegisterInputFieldEnum
     ) {
         inputFieldText?.let { value ->
             if (value.isNotBlank()) {
-                dismissError(
+                dismissInputFieldError(
                     registerInputFieldEnum
                 )
             } else {
@@ -36,7 +49,7 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    private fun dismissError(inputFieldToDismiss: RegisterInputFieldEnum) {
+    private fun dismissInputFieldError(inputFieldToDismiss: RegisterInputFieldEnum) {
         viewModelScope.launch {
             _uiState.value?.let {
                 _uiState.value =

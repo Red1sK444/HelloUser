@@ -63,7 +63,13 @@ class RegisterActivity : AppCompatActivity(R.layout.activity_register) {
 
         viewBinding.registerRegisterButton.setOnClickListener {
             with(viewBinding) {
-
+                viewModel.tryToRegister(
+                    name = registerNameTextInputEditText.text.toString(),
+                    surname = registerSurnameTextInputEditText.text.toString(),
+                    dateOfBirth = registerBirthDateTextInputEditText.text.toString(),
+                    password = registerPasswordTextInputEditText.text.toString(),
+                    confirmPassword = registerConfirmPasswordTextInputEditText.text.toString()
+                )
             }
         }
     }
