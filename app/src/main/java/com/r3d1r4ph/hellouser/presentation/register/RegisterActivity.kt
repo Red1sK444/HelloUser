@@ -2,14 +2,17 @@ package com.r3d1r4ph.hellouser.presentation.register
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.Group
 import androidx.core.widget.addTextChangedListener
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.r3d1r4ph.hellouser.R
 import com.r3d1r4ph.hellouser.databinding.ActivityRegisterBinding
+import com.r3d1r4ph.hellouser.presentation.common.extensions.forEachView
 import com.r3d1r4ph.hellouser.presentation.common.extensions.setErrorIfNotEmpty
 import com.r3d1r4ph.hellouser.presentation.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,16 +46,13 @@ class RegisterActivity : AppCompatActivity(R.layout.activity_register) {
     private fun setInputFieldsErrors(
         inputFieldErrors: Map<RegisterInputFieldEnum, Int?>
     ) = with(viewBinding) {
-        registerTextInputLayoutGroup.referencedIds
-            .map { id -> findViewById(id) as? TextInputLayout }
-            .filterNotNull()
-            .forEach { view ->
-                view.setErrorIfNotEmpty(
-                    inputFieldErrors[RegisterInputFieldEnum.fromTextInputLayoutId(
-                        view.id
-                    )]
-                )
-            }
+        registerTextInputLayoutGroup.forEachView<TextInputLayout> { view ->
+            view.setErrorIfNotEmpty(
+                inputFieldErrors[RegisterInputFieldEnum.fromTextInputLayoutId(
+                    view.id
+                )]
+            )
+        }
     }
 
     private fun openMainScreen() {
@@ -71,16 +71,13 @@ class RegisterActivity : AppCompatActivity(R.layout.activity_register) {
     }
 
     private fun initInputFieldsErrorDismisses() = with(viewBinding) {
-        registerTextInputEditTextGroup.referencedIds
-            .map { id -> findViewById(id) as? TextInputEditText }
-            .filterNotNull()
-            .forEach { view ->
-                view.addTextChangedListener { editable ->
-                    viewModel.dismissIfNotBlankOrSetEmptyError(
-                        editable,
-                        RegisterInputFieldEnum.fromTextInputEditTextId(view.id)
-                    )
-                }
+        registerTextInputEditTextGroup.forEachView<TextInputEditText> { view ->
+            view.addTextChangedListener { editable ->
+                viewModel.dismissIfNotBlankOrSetEmptyError(
+                    editable,
+                    RegisterInputFieldEnum.fromTextInputEditTextId(view.id)
+                )
             }
+        }
     }
 }
