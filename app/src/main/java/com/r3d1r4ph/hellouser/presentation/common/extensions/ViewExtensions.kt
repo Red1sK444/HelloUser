@@ -15,7 +15,7 @@ inline fun <reified T : View> Group.forEachView(
     operation: (T) -> Unit
 ) {
     referencedIds
-        .map { id -> findViewById(id) as? T }
+        .map { id -> rootView.findViewById(id) as? T }
         .filterNotNull()
         .forEach(operation)
 }

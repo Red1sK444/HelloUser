@@ -2,10 +2,8 @@ package com.r3d1r4ph.hellouser.presentation.register
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.Group
 import androidx.core.widget.addTextChangedListener
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.textfield.TextInputEditText
