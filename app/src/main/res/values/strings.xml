@@ -11,4 +11,5 @@
 
     <!-- Failures -->
     <string name="empty_field">Empty field</string>
+    <string name="greeting">Приветствие</string>
 </resources>
