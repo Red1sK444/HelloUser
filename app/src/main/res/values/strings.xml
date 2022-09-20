@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HelloUser</string>
+    <string name="app_name">Приветствие</string>
     <string name="name">Имя</string>
     <string name="surname">Фаамилия</string>
     <string name="date_of_birth">Дата рождения</string>
