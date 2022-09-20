@@ -7,7 +7,10 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.r3d1r4ph.hellouser.R
 import com.r3d1r4ph.hellouser.databinding.ActivityMainBinding
 import com.r3d1r4ph.hellouser.presentation.common.dialog.GreetingDialogFragment
+import com.r3d1r4ph.hellouser.presentation.main.model.MainAction
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private val viewBinding by viewBinding(ActivityMainBinding::bind, R.id.rootLayout)

@@ -10,8 +10,8 @@ import com.r3d1r4ph.data.user.model.User
 interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(user: User): Long
+    suspend fun insert(user: User)
 
     @Query("SELECT * FROM user LIMIT 1")
-    suspend fun getFirst(): User?
+    suspend fun getFirst(): User
 }

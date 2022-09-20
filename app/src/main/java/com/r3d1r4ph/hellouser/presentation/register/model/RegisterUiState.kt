@@ -1,4 +1,4 @@
-package com.r3d1r4ph.hellouser.presentation.register
+package com.r3d1r4ph.hellouser.presentation.register.model
 
 import com.r3d1r4ph.hellouser.R
 

@@ -48,17 +48,23 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     //binding
-    implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.5.3'
+    implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.5.6'
 
     //viewModels
     implementation 'androidx.activity:activity-ktx:1.5.1'
+
+    //fragment
+    implementation 'androidx.fragment:fragment-ktx:1.5.2'
 
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
 
     //hilt
-    implementation 'com.google.dagger:hilt-android:2.41'
-    kapt 'com.google.dagger:hilt-compiler:2.41'
+    implementation 'com.google.dagger:hilt-android:2.42'
+    kapt 'com.google.dagger:hilt-compiler:2.42'
+
+    implementation(project(path: ':domain'))
+    implementation(project(path: ':data'))
 }
 
 // Allow references to generated code

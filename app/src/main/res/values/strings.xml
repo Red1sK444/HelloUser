@@ -7,11 +7,19 @@
     <string name="confirm_password">Подтверждение пароля</string>
     <string name="shift_lab">ШИФТ ЛАБ</string>
     <string name="registration">Регистрация</string>
-    <string name="empty" />
-
-    <!-- Failures -->
-    <string name="empty_field">Empty field</string>
     <string name="greeting">Приветствие</string>
     <string name="hello_name">Привет, %s!</string>
     <string name="continue_">Продолжить</string>
+    <string name="empty" />
+
+    <!-- Failures -->
+    <string name="empty_field">Пустое поле</string>
+    <string name="passwords_are_not_equal">Пароли не совпадают</string>
+    <string name="register_user_error">Ошибка при регистрации пользователя</string>
+    <string name="unknown_error">Неизвестная ошибка</string>
+    <string name="minimal_length_x_symbols">Минимальная длина: %d символов</string>
+    <string name="first_char_no_upper_case">Первый символ должен быть заглавным</string>
+    <string name="at_least_one_symbol_has_to_be_in_upper_case">Хотя бы один символ должен быть заглавным</string>
+    <string name="at_least_one_symbol_has_to_be_in_lower_case">Хотя бы один символ должен быть прописным</string>
+    <string name="no_digit">Должна быть хотя бы одна цифра</string>
 </resources>

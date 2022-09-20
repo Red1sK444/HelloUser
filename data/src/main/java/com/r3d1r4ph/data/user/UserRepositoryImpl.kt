@@ -11,6 +11,6 @@ class UserRepositoryImpl(
         userDao.insert(User.fromDomain(userEntity))
     }
 
-    override suspend fun getUser(): UserEntity? =
-        userDao.getFirst()?.toDomain()
+    override suspend fun getUser(): UserEntity =
+        requireNotNull(userDao.getFirst()).toDomain()
 }

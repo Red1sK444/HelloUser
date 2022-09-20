@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import com.r3d1r4ph.hellouser.presentation.common.ui.Event
+import com.r3d1r4ph.hellouser.presentation.main.model.MainAction
 
 class MainViewModel : ViewModel() {
 
