@@ -4,5 +4,6 @@ import androidx.annotation.StringRes
 
 sealed class RegisterAction {
     object OpenMainScreen : RegisterAction()
+    object ShowDatePickerDialog : RegisterAction()
     data class Error(@StringRes val messageId: Int) : RegisterAction()
 }

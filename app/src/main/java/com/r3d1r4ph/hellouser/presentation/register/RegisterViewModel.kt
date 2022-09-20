@@ -46,10 +46,14 @@ class RegisterViewModel @Inject constructor(
         }
     }
 
+    fun onBirthDateClick() {
+        _uiAction.value = Event(RegisterAction.ShowDatePickerDialog)
+    }
+
     fun tryToRegister(
         name: String,
         surname: String,
-        dateOfBirth: String,
+        birthDate: String,
         password: String,
         confirmPassword: String
     ) {
@@ -58,7 +62,7 @@ class RegisterViewModel @Inject constructor(
             val inputFieldResults = listOf(
                 validateInputFieldUseCase.execute(ValidationRule.IsNameOrSurname(name)),
                 validateInputFieldUseCase.execute(ValidationRule.IsNameOrSurname(surname)),
-                validateInputFieldUseCase.execute(ValidationRule.IsBirthDate(dateOfBirth)),
+                validateInputFieldUseCase.execute(ValidationRule.IsBirthDate(birthDate)),
                 validateInputFieldUseCase.execute(ValidationRule.IsPassword(password)),
                 validateInputFieldUseCase.execute(
                     ValidationRule.IsConfirmPassword(
@@ -77,7 +81,7 @@ class RegisterViewModel @Inject constructor(
                     RegisterEntity(
                         name = name,
                         surname = surname,
-                        birthDate = dateOfBirth,
+                        birthDate = birthDate,
                         password = password,
                         confirmPassword = confirmPassword
                     )
@@ -122,6 +126,9 @@ class RegisterViewModel @Inject constructor(
                     )
                     is PasswordNotEqualWithConfirmPasswordException -> ExceptionHolder(
                         messageId = R.string.passwords_are_not_equal
+                    )
+                    is BirthDateException -> ExceptionHolder(
+                        messageId = R.string.invalid_birth_date
                     )
                     else -> ExceptionHolder(messageId = R.string.unknown_error)
                 }

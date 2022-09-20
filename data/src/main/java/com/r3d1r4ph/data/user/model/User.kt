@@ -10,7 +10,7 @@ data class User(
     val id: Int = 0,
     val name: String,
     val surname: String,
-    val dateOfBirth: String,
+    val birthDate: String,
     val password: String
 ) {
     companion object {
@@ -18,7 +18,7 @@ data class User(
             User(
                 name = domain.name,
                 surname = domain.surname,
-                dateOfBirth = domain.birthDate,
+                birthDate = domain.birthDate,
                 password = domain.password
             )
     }
@@ -27,7 +27,7 @@ data class User(
         UserEntity(
             name = name,
             surname = surname,
-            birthDate = dateOfBirth,
+            birthDate = birthDate,
             password = password
         )
 }

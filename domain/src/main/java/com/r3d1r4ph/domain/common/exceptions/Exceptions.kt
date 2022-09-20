@@ -1,8 +1,8 @@
 package com.r3d1r4ph.domain.common.exceptions
 
-class NoAtSignException : Exception()
-
 class TextLengthLessThanMinimalException(length: Int) : Exception(length.toString())
+
+class BirthDateException : Exception()
 
 class FirstCharNoUpperCaseException : Exception()
 

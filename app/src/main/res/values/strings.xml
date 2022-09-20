@@ -17,6 +17,7 @@
     <string name="passwords_are_not_equal">Пароли не совпадают</string>
     <string name="register_user_error">Ошибка при регистрации пользователя</string>
     <string name="unknown_error">Неизвестная ошибка</string>
+    <string name="invalid_birth_date">Некорректная дата рождения</string>
     <string name="minimal_length_x_symbols">Минимальная длина: %s символов</string>
     <string name="first_char_no_upper_case">Первый символ должен быть заглавным</string>
     <string name="at_least_one_symbol_has_to_be_in_upper_case">Хотя бы один символ должен быть заглавным</string>

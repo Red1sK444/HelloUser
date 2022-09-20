@@ -21,9 +21,17 @@ sealed class ValidationRule(protected val input: String) {
     }
 
     class IsBirthDate(input: String) : ValidationRule(input) {
+        private companion object {
+            const val DOT = '.'
+            const val THREE = 3
+        }
 
         override fun apply(): Result<Unit> =
-            Result.success(Unit)
+            if (hasThreeComponents()) Result.success(Unit)
+            else Result.failure(BirthDateException())
+
+        private fun hasThreeComponents(): Boolean =
+            input.split(DOT).size == THREE
     }
 
     class IsPassword(input: String) : ValidationRule(input) {

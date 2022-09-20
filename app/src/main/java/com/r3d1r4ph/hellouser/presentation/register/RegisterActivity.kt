@@ -1,7 +1,10 @@
 package com.r3d1r4ph.hellouser.presentation.register
 
+import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +21,8 @@ import com.r3d1r4ph.hellouser.presentation.main.MainActivity
 import com.r3d1r4ph.hellouser.presentation.register.model.RegisterAction
 import com.r3d1r4ph.hellouser.presentation.register.model.RegisterInputFieldEnum
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
+
 
 @AndroidEntryPoint
 class RegisterActivity : AppCompatActivity(R.layout.activity_register) {
@@ -31,6 +36,7 @@ class RegisterActivity : AppCompatActivity(R.layout.activity_register) {
         initView()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setObservers() = with(viewModel) {
         uiState.observe(this@RegisterActivity) { uiState ->
             viewBinding.registerRegisterButton.isEnabled = uiState.isRegisterAvailable
@@ -46,6 +52,12 @@ class RegisterActivity : AppCompatActivity(R.layout.activity_register) {
                             getString(action.messageId),
                             Toast.LENGTH_LONG
                         ).show()
+                    }
+                    is RegisterAction.ShowDatePickerDialog -> {
+                        showDatePickerDialog { _, year, monthOfYear, dayOfMonth ->
+                            viewBinding.registerBirthDateTextInputEditText
+                                .setText("$dayOfMonth.$monthOfYear.$year")
+                        }
                     }
                 }
             }
@@ -69,6 +81,15 @@ class RegisterActivity : AppCompatActivity(R.layout.activity_register) {
         finish()
     }
 
+    private fun showDatePickerDialog(listener: DatePickerDialog.OnDateSetListener) {
+        val calendar = Calendar.getInstance()
+        val currentYear = calendar.get(Calendar.YEAR)
+        val currentMonth = calendar.get(Calendar.MONTH)
+        val currentDay = calendar.get(Calendar.DAY_OF_MONTH)
+
+        DatePickerDialog(this, listener, currentYear, currentMonth, currentDay).show()
+    }
+
     private fun initView() {
         initInputFieldsErrorDismisses()
 
@@ -77,12 +98,24 @@ class RegisterActivity : AppCompatActivity(R.layout.activity_register) {
                 viewModel.tryToRegister(
                     name = registerNameTextInputEditText.text.toString(),
                     surname = registerSurnameTextInputEditText.text.toString(),
-                    dateOfBirth = registerBirthDateTextInputEditText.text.toString(),
+                    birthDate = registerBirthDateTextInputEditText.text.toString(),
                     password = registerPasswordTextInputEditText.text.toString(),
                     confirmPassword = registerConfirmPasswordTextInputEditText.text.toString()
                 )
             }
         }
+
+        with(viewBinding.registerBirthDateTextInputEditText) {
+            onFocusChangeListener =
+                View.OnFocusChangeListener { view, hasFocus ->
+                    if (hasFocus) {
+                        view.clearFocus()
+                        viewModel.onBirthDateClick()
+                    }
+                }
+            isCursorVisible = false
+        }
+
     }
 
     private fun initInputFieldsErrorDismisses() = with(viewBinding) {
