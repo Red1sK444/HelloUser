@@ -51,5 +51,16 @@ sealed class ValidationRule(protected val input: String) {
             }
     }
 
+    class IsConfirmPassword(input: String, private val password: String) : ValidationRule(input) {
+
+        override fun apply(): Result<Unit> =
+            if (password != input) {
+                Result.failure(PasswordNotEqualWithConfirmPasswordException())
+            } else {
+                IsPassword(input).apply()
+            }
+
+    }
+
     abstract fun apply(): Result<Unit>
 }

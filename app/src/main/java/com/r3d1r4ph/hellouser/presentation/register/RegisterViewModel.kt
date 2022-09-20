@@ -60,7 +60,12 @@ class RegisterViewModel @Inject constructor(
                 validateInputFieldUseCase.execute(ValidationRule.IsNameOrSurname(surname)),
                 validateInputFieldUseCase.execute(ValidationRule.IsBirthDate(dateOfBirth)),
                 validateInputFieldUseCase.execute(ValidationRule.IsPassword(password)),
-                validateInputFieldUseCase.execute(ValidationRule.IsPassword(confirmPassword))
+                validateInputFieldUseCase.execute(
+                    ValidationRule.IsConfirmPassword(
+                        confirmPassword,
+                        password = password
+                    )
+                )
             )
 
             val hasError = inputFieldResults.any { it.isFailure }
@@ -114,6 +119,9 @@ class RegisterViewModel @Inject constructor(
                     )
                     is NoDigitException -> ExceptionHolder(
                         messageId = R.string.no_digit
+                    )
+                    is PasswordNotEqualWithConfirmPasswordException -> ExceptionHolder(
+                        messageId = R.string.passwords_are_not_equal
                     )
                     else -> ExceptionHolder(messageId = R.string.unknown_error)
                 }
