@@ -11,6 +11,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.r3d1r4ph.hellouser.R
 import com.r3d1r4ph.hellouser.databinding.ActivityRegisterBinding
+import com.r3d1r4ph.hellouser.presentation.common.exception.ExceptionHolder
 import com.r3d1r4ph.hellouser.presentation.common.extensions.forEachView
 import com.r3d1r4ph.hellouser.presentation.common.extensions.setErrorIfNotEmpty
 import com.r3d1r4ph.hellouser.presentation.main.MainActivity
@@ -52,7 +53,7 @@ class RegisterActivity : AppCompatActivity(R.layout.activity_register) {
     }
 
     private fun setInputFieldsErrors(
-        inputFieldErrors: Map<RegisterInputFieldEnum, Int?>
+        inputFieldErrors: Map<RegisterInputFieldEnum, ExceptionHolder?>
     ) = with(viewBinding) {
         registerTextInputLayoutGroup.forEachView<TextInputLayout> { view ->
             view.setErrorIfNotEmpty(

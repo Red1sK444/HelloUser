@@ -1,7 +1,6 @@
 package com.r3d1r4ph.hellouser.presentation.register
 
 import android.text.Editable
-import androidx.annotation.StringRes
 import androidx.lifecycle.*
 import com.r3d1r4ph.domain.common.exceptions.*
 import com.r3d1r4ph.domain.common.validation.ValidationRule
@@ -10,6 +9,7 @@ import com.r3d1r4ph.domain.usecases.GetUserUseCase
 import com.r3d1r4ph.domain.usecases.RegisterUseCase
 import com.r3d1r4ph.domain.usecases.ValidateInputFieldUseCase
 import com.r3d1r4ph.hellouser.R
+import com.r3d1r4ph.hellouser.presentation.common.exception.ExceptionHolder
 import com.r3d1r4ph.hellouser.presentation.common.ui.Event
 import com.r3d1r4ph.hellouser.presentation.register.model.RegisterAction
 import com.r3d1r4ph.hellouser.presentation.register.model.RegisterInputFieldEnum
@@ -83,7 +83,7 @@ class RegisterViewModel @Inject constructor(
 
     private fun updateInputFieldErrors(inputFieldResults: List<Result<Unit>>) {
         val inputFieldErrorMessages =
-            inputFieldResults.map { result -> getErrorMessageByValidationResult(result) }
+            inputFieldResults.map { result -> getExceptionHolderByValidationResult(result) }
 
         _uiState.value = RegisterUiState(
             inputFieldErrors = RegisterInputFieldEnum.values()
@@ -92,24 +92,34 @@ class RegisterViewModel @Inject constructor(
         )
     }
 
-    @StringRes
-    private fun getErrorMessageByValidationResult(validationResult: Result<Unit>): Int? {
+    private fun getExceptionHolderByValidationResult(validationResult: Result<Unit>): ExceptionHolder? {
         validationResult
             .onSuccess {
                 return null
             }
             .onFailure {
                 return when (it) {
-                    is TextLengthLessThanMinimalException -> R.string.minimal_length_x_symbols
-                    is FirstCharNoUpperCaseException -> R.string.first_char_no_upper_case
-                    is NoUpperCaseException -> R.string.at_least_one_symbol_has_to_be_in_upper_case
-                    is NoLowerCaseException -> R.string.at_least_one_symbol_has_to_be_in_lower_case
-                    is NoDigitException -> R.string.no_digit
-                    else -> R.string.unknown_error
+                    is TextLengthLessThanMinimalException -> ExceptionHolder(
+                        messageId = R.string.minimal_length_x_symbols,
+                        formatArg = it.message
+                    )
+                    is FirstCharNoUpperCaseException -> ExceptionHolder(
+                        messageId = R.string.first_char_no_upper_case
+                    )
+                    is NoUpperCaseException -> ExceptionHolder(
+                        messageId = R.string.at_least_one_symbol_has_to_be_in_upper_case
+                    )
+                    is NoLowerCaseException -> ExceptionHolder(
+                        messageId = R.string.at_least_one_symbol_has_to_be_in_lower_case
+                    )
+                    is NoDigitException -> ExceptionHolder(
+                        messageId = R.string.no_digit
+                    )
+                    else -> ExceptionHolder(messageId = R.string.unknown_error)
                 }
             }
 
-        return R.string.unknown_error
+        return ExceptionHolder(messageId = R.string.unknown_error)
     }
 
     private suspend fun register(registerEntity: RegisterEntity) {
@@ -167,8 +177,9 @@ class RegisterViewModel @Inject constructor(
                 _uiState.value =
                     it.copy(
                         inputFieldErrors = it.inputFieldErrors.keys.associateWith { inputFieldEnum ->
-                            if (inputFieldEnum == inputFieldToDismiss) R.string.empty_field
-                            else it.inputFieldErrors[inputFieldEnum]
+                            if (inputFieldEnum == inputFieldToDismiss) {
+                                ExceptionHolder(messageId = R.string.empty_field)
+                            } else it.inputFieldErrors[inputFieldEnum]
                         }
                     )
             }
